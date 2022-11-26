@@ -1,0 +1,44 @@
+crawler:
+  start: True
+  num_threads: 1
+  depth: 2
+  breadth: 2
+  intern_hyperlinks: False
+  extern_hyperlinks: True
+  download.default_directory: "wasm_files"
+docker:
+  env_var: "RUN_IN_DOCKER_CONTAINER"
+  uri: "http://selenium-hub:4444/wd/hub"
+chrome:
+  driver_path: "./chrome/chrome_driver/win32/chromedriver.exe"
+  max_window_size: False
+  arguments:
+    - "--force-dev-mode-highlighting"
+    - "--auto-open-devtools-for-tabs"
+    - "--window-size=1920x1080"
+    - "--disable-popup-blocking"
+    - "--mute-audio"
+  prefs:
+    download.default_directory: "/home/seluser/"
+    download.prompt_for_download: False
+    download.directory_upgrade: True
+    download.download_restrictions: 1
+    safebrowsing.enabled: True
+  extension:
+    crx_file_path: './chrome/chrome_extension/extension_6_9_11_0.crx'
+    chrome_extensions_url: "chrome://extensions/"
+    background_page: "chrome-extension://gppongmhjkpfnbhagpmjfkannfbllamg/html/background.html"
+input_file:
+  name: "input"
+  prefix: "https://"
+  suffix: ""
+database:
+  setup: True
+  path: '/WebCrawler/database/website_data.db'
+  local_path: './database/website_data.db'
+analysis:
+  start: True
+  html_file_dict: "analysis"
+  html_file: "analysis.html"
+  url: "http://127.17.0.3:5000/"
+

@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+    crawler:
+        build:
+            context: ./
+            dockerfile: ./docker/crawler/Dockerfile
+        container_name: crawler
+        shm_size: 2gb
+        restart: always
+        image: crawler
+        depends_on:
+          - chrome
+        volumes:
+          - dbdata:/WebCrawler/database/
+          - wasmfiles:/WebCrawler/wasm_files/
+    analysis:
+        build:
+            context: ./
+            dockerfile: ./docker/analysis/Dockerfile
+        container_name: analysis
+        shm_size: 2gb
+        restart: always
+        image: analysis
+        ports:
+            - "5000:5000"
+        volumes:
+          - dbdata:/Analysis/database/
+    chrome:
+        image: selenium/node-chrome:4.1.3-20220327
+        shm_size: 2gb
+        depends_on:
+          - selenium-hub
+        volumes:
+          - wasmfiles:/home/seluser/
+        environment:
+          - SE_EVENT_BUS_HOST=selenium-hub
+          - SE_EVENT_BUS_PUBLISH_PORT=4442
+          - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    selenium-hub:
+        image: selenium/hub:4.1.3-20220327
+        container_name: selenium-hub
+        volumes:
+          - wasmfiles:/home/seluser/
+        ports:
+          - "4442:4442"
+          - "4443:4443"
+          - "4444:4444"
+volumes:
+  dbdata:
+  wasmfiles:

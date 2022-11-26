@@ -1,0 +1,8 @@
+selenium==3.141.0
+guesslang==2.2.1
+regex>=2020.11.13
+ppci>=0.5.8
+pyyaml
+Flask
+validators
+redis

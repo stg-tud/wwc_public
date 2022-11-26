@@ -1,0 +1,68 @@
+ 
+            <!doctype html>
+            <html lang="en">
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+              </head>
+              <body>
+                <h1 style="text-align: center; width: 100%; padding: 10px;"> Website Crawler Data Analysis</h1>
+                <div style="text-align: center; width: 100%; padding: 10px; display: inline;">
+                
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">Examples</div>
+                <div class="panel-body" style="font-family: monospace"> <mark style="color:orange">PRAGMA</mark> table_info(Website)<br><mark style="color:orange">SELECT</mark> name <mark style="color:orange">FROM</mark> sqlite_master <mark style="color:orange">WHERE</mark> type='table';<br><mark style="color:orange">SELECT</mark> <mark style="color:red">COUNT(</mark>name_<mark style="color:red">)</mark> <mark style="color:orange">FROM</mark> Website <mark style="color:orange">WHERE</mark> root='input_file';<br><mark style="color:orange">SELECT</mark> * <mark style="color:orange">FROM</mark> Website;<br><mark style="color:orange">SELECT</mark> <mark style="color:red">COUNT(</mark>Website.website_id<mark style="color:red">)</mark> <mark style="color:orange">FROM</mark> Website <mark style="color:orange">LEFT OUTER JOIN</mark> WebAssembly <mark style="color:orange">ON</mark> Website.wa_id = WebAssembly.web_assembly_id <mark style="color:orange">WHERE</mark> WebAssembly.used = 1;<br><mark style="color:orange">SELECT</mark> Website.website_id, Website.name_ <mark style="color:orange">FROM</mark> Website <mark style="color:orange">LEFT OUTER JOIN</mark> WebAssembly <mark style="color:orange">ON</mark> Website.wa_id = WebAssembly.web_assembly_id <mark style="color:orange">WHERE</mark> WebAssembly.used = 1;</div>
+            </div>
+            
+            <form action="{{ url_for('index') }}" method="POST">         
+                <div class="form-group">
+                    <label for='select'>Select statement</label>
+                    <textarea class="form-control" name="select" id="select_id" rows="3" placeholder='Enter Select statement (example: "SELECT * FROM Website WHERE root=?;")'></textarea>
+               </div>
+               <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm btn-block">
+            </form>
+            
+            <div class="panel panel-default" style=" margin-top: 2%; ">
+                <div class="panel-body">
+                    {% if exception %}
+                        {{ exception }}
+                    {% endif %}
+                    <table class ="table" style="table-layout: fixed; width: 100%;">
+                        {% if columns %}
+                            <thead>
+                                <tr>
+                                    {% for i in columns %}
+                                        <th style="text-align: center; vertical-align: middle;" scope="col"> {{ i }}</th>
+                                    {% endfor %}   
+                                </tr>
+                           </thead>
+                        {% endif %}
+                        {% if rows %}
+                           <tbody>
+                                <tr>
+                                    {% for i in rows %}
+                                        <tr style="word-wrap: break-word; overflow-wrap: break-word; ">
+                                        {% for j in i %}
+                                                <td style="word-wrap: break-word; overflow-wrap: break-word; "> {{ j }} </td>
+                                        {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tr> 
+                           </tbody>
+                       {% endif %}
+                    </table>
+                </div>
+            </div> 
+        </div>
+                </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+              </body>
+            </html> 
